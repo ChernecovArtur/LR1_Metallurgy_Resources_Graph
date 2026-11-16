@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import requests
+from bs4 import BeautifulSoup
 
 
 url = "https://nlmk.com/ru/"
@@ -18,6 +19,27 @@ Path("cache").mkdir(exist_ok=True)
 with open("cache/nlmk.html", "w", encoding="utf-8") as file:
     file.write(response.text)
 
-print("Страница загружена")
-print("Размер HTML:", len(response.text))
-print("Сохранено в cache/nlmk.html")
+soup = BeautifulSoup(response.text, "lxml")
+
+# Это нам не нужно
+for tag in soup(["script", "style", "noscript"]):
+    tag.decompose()
+
+parts = []
+
+for tag in soup.find_all(["p", "h1", "h2", "h3", "h4", "h5", "h6", "li"]):
+    text = tag.get_text(" ", strip=True)
+
+    # Отбрасываем совсем короткие куски
+    if len(text) >= 25:
+        parts.append(text)
+
+text = "\n".join(parts)
+
+with open("cache/nlmk.txt", "w", encoding="utf-8") as file:
+    file.write(text)
+
+print("Текст извлечён")
+print("Размер текста:", len(text))
+print()
+print(text[:1000])
