@@ -1,0 +1,5 @@
+﻿id,title,url,error
+R09,Северсталь-окомпании,https://severstal.com/rus/about/,"HTTPSConnectionPool(host='severstal.com', port=443): Read timed out. (read timeout=30)"
+R10,Северсталь-стратегия,https://severstal.com/rus/about/strategy/,"HTTPSConnectionPool(host='severstal.com', port=443): Read timed out. (read timeout=30)"
+R12,Северсталь-предприятия,https://severstal.com/rus/about/structure/businesses/,Мало текста или терминов
+R19,Мечел-металлургическаяпродукция,https://mechel.ru/production/metallurgy/,Мало текста или терминов
