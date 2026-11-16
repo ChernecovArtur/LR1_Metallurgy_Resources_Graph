@@ -3,3 +3,4 @@ beautifulsoup4>=4.12
 lxml>=5.0
 rutermextract>=0.3
 setuptools<81
+graphviz>=0.21
