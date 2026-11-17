@@ -1,21 +1,19 @@
 import argparse
 import json
 from io import BytesIO
+from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
+from tabulate import tabulate
 from warcio.archiveiterator import ArchiveIterator
 
 
-def search_cdx(keywords, domain, limit):
-    collections_response = requests.get(
-        "https://index.commoncrawl.org/collinfo.json",
-        timeout=30
-    )
-    collections_response.raise_for_status()
+INDEX_URL = "https://index.commoncrawl.org/CC-MAIN-2025-30-index"
+CACHE_FILE = Path(__file__).with_name("cdx_cache.json")
 
-    index_url = collections_response.json()[0]["cdx-api"]
-    # Если домен не указан, первое слово как домен
+
+def search_cdx(keywords, domain, limit):
     url_pattern = domain or keywords[0]
 
     params = {
@@ -28,23 +26,47 @@ def search_cdx(keywords, domain, limit):
         "limit": limit * 10,
     }
 
-    response = requests.get(
-        index_url,
-        params=params,
-        timeout=60
-    )
-    response.raise_for_status()
+    records = None
 
-    records = []
-    for line in response.text.splitlines():
-        if line.strip():
-            records.append(json.loads(line))
+    try:
+        response = requests.get(
+            INDEX_URL,
+            params=params,
+            timeout=15
+        )
+        response.raise_for_status()
+
+        records = []
+        for line in response.text.splitlines():
+            if line.strip():
+                records.append(json.loads(line))
+
+        if records:
+            CACHE_FILE.write_text(
+                json.dumps(records, ensure_ascii=False, indent=2),
+                encoding="utf-8"
+            )
+
+    except (requests.RequestException, json.JSONDecodeError):
+        print("CDX недоступен, использую сохранённый ответ")
+
+    if records is None:
+        if not CACHE_FILE.exists():
+            return []
+
+        records = json.loads(
+            CACHE_FILE.read_text(encoding="utf-8")
+        )
 
     words = [word.casefold() for word in keywords]
+    domain_text = (domain or "").casefold().strip("/")
     results = []
 
     for record in records:
         url = record["url"].casefold()
+
+        if domain_text and domain_text not in url:
+            continue
 
         if all(word in url for word in words):
             results.append(record)
@@ -65,7 +87,7 @@ def load_page(record):
     response = requests.get(
         warc_url,
         headers={"Range": f"bytes={offset}-{end}"},
-        timeout=60
+        timeout=20
     )
     response.raise_for_status()
 
@@ -127,18 +149,43 @@ def main():
         print("Ничего не найдено")
         return
 
+    headers = ["URL", "Дата архивации", "Заголовок"]
+    widths = [50, 14, 35]
+
+    if args.show_text:
+        headers.append("Фрагмент текста")
+        widths.append(50)
+
+    rows = []
+
     for result in results:
-        print(result["timestamp"], result["url"])
+        timestamp = result["timestamp"]
+        date = f"{timestamp[:4]}-{timestamp[4:6]}-{timestamp[6:8]}"
+
+        row = [result["url"], date]
 
         if args.show_text:
             try:
                 title, text = load_page(result)
-                print("Заголовок:", title)
-                print("Текст:", text[:500])
-            except Exception as error:
-                print("Не удалось загрузить страницу:", error)
+                fragment = text[:200]
+            except Exception:
+                title = "—"
+                fragment = "WARC сейчас недоступен"
 
-        print()
+            row.extend([title, fragment])
+        else:
+            row.append("—")
+
+        rows.append(row)
+
+    print(
+        tabulate(
+            rows,
+            headers=headers,
+            tablefmt="grid",
+            maxcolwidths=widths
+        )
+    )
 
 
 if __name__ == "__main__":
