@@ -7,17 +7,17 @@ import requests
 from bs4 import BeautifulSoup
 from tabulate import tabulate
 from warcio.archiveiterator import ArchiveIterator
-
+from collections import Counter
+from urllib.parse import urlsplit
 
 INDEX_URL = "https://index.commoncrawl.org/CC-MAIN-2025-30-index"
 CACHE_FILE = Path(__file__).with_name("cdx_cache.json")
+TEXT_SCAN_LIMIT = 20
 
 
 def search_cdx(keywords, domain, limit):
-    url_pattern = domain or keywords[0]
-
     params = {
-        "url": url_pattern,
+        "url": domain or keywords[0],
         "matchType": "domain",
         "output": "json",
         "filter": ["status:200", "mime:text/html"],
@@ -26,20 +26,15 @@ def search_cdx(keywords, domain, limit):
         "limit": limit * 10,
     }
 
-    records = None
-
     try:
-        response = requests.get(
-            INDEX_URL,
-            params=params,
-            timeout=15
-        )
+        response = requests.get(INDEX_URL, params=params, timeout=15)
         response.raise_for_status()
 
-        records = []
-        for line in response.text.splitlines():
-            if line.strip():
-                records.append(json.loads(line))
+        records = [
+            json.loads(line)
+            for line in response.text.splitlines()
+            if line.strip()
+        ]
 
         if records:
             CACHE_FILE.write_text(
@@ -48,24 +43,17 @@ def search_cdx(keywords, domain, limit):
             )
 
     except (requests.RequestException, json.JSONDecodeError):
-        print("CDX недоступен, использую сохранённый ответ")
-
-    if records is None:
-        if not CACHE_FILE.exists():
-            return []
-
-        records = json.loads(
-            CACHE_FILE.read_text(encoding="utf-8")
-        )
+        print("CDX недоступен, использую кэш")
+        records = json.loads(CACHE_FILE.read_text(encoding="utf-8"))
 
     words = [word.casefold() for word in keywords]
-    domain_text = (domain or "").casefold().strip("/")
+    domain_filter = (domain or "").casefold().strip("/")
     results = []
 
     for record in records:
         url = record["url"].casefold()
 
-        if domain_text and domain_text not in url:
+        if domain_filter and domain_filter not in url:
             continue
 
         if all(word in url for word in words):
@@ -79,9 +67,7 @@ def search_cdx(keywords, domain, limit):
 
 def load_page(record):
     offset = int(record["offset"])
-    length = int(record["length"])
-    end = offset + length - 1
-
+    end = offset + int(record["length"]) - 1
     warc_url = "https://data.commoncrawl.org/" + record["filename"]
 
     response = requests.get(
@@ -91,59 +77,94 @@ def load_page(record):
     )
     response.raise_for_status()
 
-    archive = ArchiveIterator(BytesIO(response.content))
-
-    for warc_record in archive:
+    for warc_record in ArchiveIterator(BytesIO(response.content)):
         if warc_record.rec_type != "response":
             continue
 
         html = warc_record.content_stream().read()
         soup = BeautifulSoup(html, "html.parser")
-
-        if soup.title:
-            title = soup.title.get_text(" ", strip=True)
-        else:
-            title = "—"
+        title = soup.title.get_text(" ", strip=True) if soup.title else "—"
 
         for tag in soup(["script", "style", "noscript"]):
             tag.decompose()
 
-        text = soup.get_text(" ", strip=True)
-        return title, text
+        return title, soup.get_text(" ", strip=True)
 
     return "—", ""
 
 
+def find_in_text(records, words, limit):
+    results = []
+    words = [word.casefold() for word in words]
+
+    for record in records:
+        try:
+            title, text = load_page(record)
+        except Exception:
+            continue
+
+        if all(word in text.casefold() for word in words):
+            record["_title"] = title
+            record["_text"] = text
+            results.append(record)
+
+        if len(results) >= limit:
+            break
+
+    return results
+
+def print_stats(records):
+    domains = Counter(
+        urlsplit(record["url"]).hostname
+        for record in records
+    )
+
+    months = Counter(
+        record["timestamp"][:6]
+        for record in records
+    )
+
+    domain_rows = [
+        [domain, count]
+        for domain, count in domains.most_common()
+    ]
+
+    month_rows = [
+        [f"{month[:4]}-{month[4:]}", count]
+        for month, count in sorted(months.items())
+    ]
+
+    print("\nРаспределение по доменам:")
+    print(tabulate(
+        domain_rows,
+        headers=["Домен", "Страниц"],
+        tablefmt="grid"
+    ))
+
+    print("\nРаспределение по месяцам архивации:")
+    print(tabulate(
+        month_rows,
+        headers=["Месяц", "Страниц"],
+        tablefmt="grid"
+    ))
+
 def main():
     parser = argparse.ArgumentParser(description="Поиск в Common Crawl")
-
-    parser.add_argument(
-        "keywords",
-        nargs="+",
-        help="Ключевые слова"
-    )
-
-    parser.add_argument(
-        "--domain",
-        help="Домен"
-    )
-
-    parser.add_argument(
-        "--limit",
-        type=int,
-        default=10,
-        help="Число результатов"
-    )
-
-    parser.add_argument(
-        "--show-text",
-        action="store_true",
-        help="Показать текст страницы"
-    )
+    parser.add_argument("keywords", nargs="+", help="Ключевые слова в URL")
+    parser.add_argument("--domain", help="Домен")
+    parser.add_argument("--limit", type=int, default=10, help="Число результатов")
+    parser.add_argument("--show-text", action="store_true", help="Показать текст")
+    parser.add_argument("--text", nargs="+", default=[], help="Слова в тексте")
+    parser.add_argument("--stats", action="store_true", help="Показать статистику")
 
     args = parser.parse_args()
+    show_text = args.show_text or bool(args.text)
 
-    results = search_cdx(args.keywords, args.domain, args.limit)
+    if args.text:
+        records = search_cdx(args.keywords, args.domain, TEXT_SCAN_LIMIT)
+        results = find_in_text(records, args.text, args.limit)
+    else:
+        results = search_cdx(args.keywords, args.domain, args.limit)
 
     if not results:
         print("Ничего не найдено")
@@ -152,7 +173,7 @@ def main():
     headers = ["URL", "Дата архивации", "Заголовок"]
     widths = [50, 14, 35]
 
-    if args.show_text:
+    if show_text:
         headers.append("Фрагмент текста")
         widths.append(50)
 
@@ -161,16 +182,19 @@ def main():
     for result in results:
         timestamp = result["timestamp"]
         date = f"{timestamp[:4]}-{timestamp[4:6]}-{timestamp[6:8]}"
-
         row = [result["url"], date]
 
-        if args.show_text:
+        if show_text:
             try:
-                title, text = load_page(result)
+                if "_text" in result:
+                    title = result["_title"]
+                    text = result["_text"]
+                else:
+                    title, text = load_page(result)
+
                 fragment = text[:200]
             except Exception:
-                title = "—"
-                fragment = "WARC сейчас недоступен"
+                title, fragment = "—", "WARC сейчас недоступен"
 
             row.extend([title, fragment])
         else:
@@ -178,14 +202,15 @@ def main():
 
         rows.append(row)
 
-    print(
-        tabulate(
-            rows,
-            headers=headers,
-            tablefmt="grid",
-            maxcolwidths=widths
-        )
-    )
+    print(tabulate(
+        rows,
+        headers=headers,
+        tablefmt="grid",
+        maxcolwidths=widths
+    ))
+
+    if args.stats:
+        print_stats(results)
 
 
 if __name__ == "__main__":
