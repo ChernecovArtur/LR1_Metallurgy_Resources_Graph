@@ -77,6 +77,49 @@ def get_articles(search_results):
 
     return articles
 
+def get_wikidata(articles):
+    ids = [
+        article["wikidata_id"]
+        for article in articles
+        if article["wikidata_id"]
+    ]
+
+    params = {
+        "action": "wbgetentities",
+        "format": "json",
+        "ids": "|".join(ids),
+        "props": "labels|descriptions|claims",
+        "languages": "ru|en",
+    }
+
+    response = requests.get(
+        "https://www.wikidata.org/w/api.php",
+        params=params,
+        headers=HEADERS,
+        timeout=60
+    )
+    response.raise_for_status()
+
+    entities = []
+
+    for qid, entity in response.json()["entities"].items():
+        labels = entity.get("labels", {})
+        descriptions = entity.get("descriptions", {})
+
+        entities.append({
+            "id": qid,
+            "label": labels.get(
+                "ru",
+                labels.get("en", {})
+            ).get("value", ""),
+            "description": descriptions.get(
+                "ru",
+                descriptions.get("en", {})
+            ).get("value", ""),
+            "properties": list(entity.get("claims", {}).keys()),
+        })
+
+    return entities
 
 def main():
     query = input("Введите запрос: ")
@@ -84,18 +127,22 @@ def main():
     search_results = search_articles(query)
     articles = get_articles(search_results)
 
+    wikidata = get_wikidata(articles)
+
     result = {
         "query": query,
         "articles": articles,
+        "wikidata": wikidata,
     }
 
-    output_file = Path(__file__).with_name("wikipedia.json")
+    output_file = Path(__file__).with_name("wikimedia.json")
     output_file.write_text(
         json.dumps(result, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
 
     print(f"Сохранено статей: {len(articles)}")
+    print(f"Сущностей Wikidata: {len(wikidata)}")
     print(f"Файл: {output_file.name}")
 
 
