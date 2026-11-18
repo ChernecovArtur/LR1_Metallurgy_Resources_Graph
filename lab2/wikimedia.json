@@ -838,6 +838,20 @@
       "wikidata_id": "Q4230410"
     },
     {
+      "title": "Миксер (металлургия)",
+      "url": "https://ru.wikipedia.org/wiki/%D0%9C%D0%B8%D0%BA%D1%81%D0%B5%D1%80_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)",
+      "text": "",
+      "links": [],
+      "images": [
+        "Файл:Image-silk.png",
+        "Файл:Images.png",
+        "Файл:OOjs UI icon edit-ltr-progressive.svg",
+        "Файл:Wikipedia interwiki section gear icon.svg"
+      ],
+      "thumbnail": null,
+      "wikidata_id": "Q4293206"
+    },
+    {
       "title": "Брикет (металлургия)",
       "url": "https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B8%D0%BA%D0%B5%D1%82_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)",
       "text": "",
@@ -911,18 +925,6 @@
       "images": [],
       "thumbnail": null,
       "wikidata_id": "Q56314263"
-    },
-    {
-      "title": "Прибыль (металлургия)",
-      "url": "https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%B1%D1%8B%D0%BB%D1%8C_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)",
-      "text": "",
-      "links": [],
-      "images": [
-        "Файл:Metallurgy stub.svg",
-        "Файл:Notification-icon-Wiktionary-logo.svg"
-      ],
-      "thumbnail": null,
-      "wikidata_id": "Q1971904"
     },
     {
       "title": "Кулифеев, Владимир Константинович",
@@ -1428,6 +1430,16 @@
       ]
     },
     {
+      "id": "Q4293206",
+      "label": "Миксер (металлургия)",
+      "description": "",
+      "properties": [
+        "P2924",
+        "P2671",
+        "P1343"
+      ]
+    },
+    {
       "id": "Q153022",
       "label": "брикет",
       "description": "окускованный материал, получаемый прессованием",
@@ -1499,22 +1511,6 @@
       "description": "",
       "properties": [
         "P2671"
-      ]
-    },
-    {
-      "id": "Q1971904",
-      "label": "прибыль",
-      "description": "в литейном производстве — часть стального слитка (отливки), габариты которой выступают за пределы требуемых размеров",
-      "properties": [
-        "P646",
-        "P1343",
-        "P1417",
-        "P227",
-        "P1296",
-        "P8814",
-        "P12385",
-        "P7305",
-        "P1368"
       ]
     },
     {
@@ -1602,6 +1598,58 @@
       "title": "металлурги",
       "url": "https://ru.wiktionary.org/wiki/%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8",
       "text": ""
+    }
+  ],
+  "commons": [
+    {
+      "title": "File:VysokePece1.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:VysokePece1.jpg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/VysokePece1.jpg/500px-VysokePece1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "title": "File:Omassa Metallurgical Museum 01.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Omassa_Metallurgical_Museum_01.jpg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Omassa_Metallurgical_Museum_01.jpg/500px-Omassa_Metallurgical_Museum_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "title": "File:Godlo hutnicze metallurgy symbol.svg",
+      "url": "https://commons.wikimedia.org/wiki/File:Godlo_hutnicze_metallurgy_symbol.svg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Godlo_hutnicze_metallurgy_symbol.svg/500px-Godlo_hutnicze_metallurgy_symbol.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "title": "File:Metallurgy Theory and Prictice.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Metallurgy_Theory_and_Prictice.jpg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Metallurgy_Theory_and_Prictice.jpg/500px-Metallurgy_Theory_and_Prictice.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "title": "File:Metallurgy icon.png",
+      "url": "https://commons.wikimedia.org/wiki/File:Metallurgy_icon.png",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Metallurgy_icon.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    },
+    {
+      "title": "File:Pigtail from Single Crystal Blade Casting shown with Kennedy Half Dollar for size comparison.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Pigtail_from_Single_Crystal_Blade_Casting_shown_with_Kennedy_Half_Dollar_for_size_comparison.jpg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Pigtail_from_Single_Crystal_Blade_Casting_shown_with_Kennedy_Half_Dollar_for_size_comparison.jpg/500px-Pigtail_from_Single_Crystal_Blade_Casting_shown_with_Kennedy_Half_Dollar_for_size_comparison.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "title": "File:Founders Burial from Ban Non wat.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Founders_Burial_from_Ban_Non_wat.jpg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Founders_Burial_from_Ban_Non_wat.jpg/500px-Founders_Burial_from_Ban_Non_wat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "title": "File:Heyden Gold Farbmuster 1927.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Heyden_Gold_Farbmuster_1927.jpg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Heyden_Gold_Farbmuster_1927.jpg/500px-Heyden_Gold_Farbmuster_1927.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "title": "File:Demir karbon denge diyagramı.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Demir_karbon_denge_diyagram%C4%B1.jpg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Demir_karbon_denge_diyagram%C4%B1.jpg/500px-Demir_karbon_denge_diyagram%C4%B1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    },
+    {
+      "title": "File:Gevrek ve sünek malzemelerin gerilme birim şekil değişimi karşılaştırması.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Gevrek_ve_s%C3%BCnek_malzemelerin_gerilme_birim_%C5%9Fekil_de%C4%9Fi%C5%9Fimi_kar%C5%9F%C4%B1la%C5%9Ft%C4%B1rmas%C4%B1.jpg",
+      "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Gevrek_ve_s%C3%BCnek_malzemelerin_gerilme_birim_%C5%9Fekil_de%C4%9Fi%C5%9Fimi_kar%C5%9F%C4%B1la%C5%9Ft%C4%B1rmas%C4%B1.jpg/500px-Gevrek_ve_s%C3%BCnek_malzemelerin_gerilme_birim_%C5%9Fekil_de%C4%9Fi%C5%9Fimi_kar%C5%9F%C4%B1la%C5%9Ft%C4%B1rmas%C4%B1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
     }
   ]
 }

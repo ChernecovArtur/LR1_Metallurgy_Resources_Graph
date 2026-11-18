@@ -153,6 +153,42 @@ def get_wiktionary(query):
         for page in pages
     ]
 
+def get_commons(query):
+    params = {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "generator": "search",
+        "gsrsearch": query,
+        "gsrnamespace": "6",
+        "gsrlimit": "10",
+        "prop": "imageinfo",
+        "iiprop": "url",
+        "iiurlwidth": "500",
+    }
+
+    response = requests.get(
+        "https://commons.wikimedia.org/w/api.php",
+        params=params,
+        headers=HEADERS,
+        timeout=30
+    )
+    response.raise_for_status()
+
+    pages = response.json().get("query", {}).get("pages", [])
+    images = []
+
+    for page in pages:
+        info = page.get("imageinfo", [{}])[0]
+
+        images.append({
+            "title": page["title"],
+            "url": info.get("descriptionurl", ""),
+            "image_url": info.get("thumburl", info.get("url", "")),
+        })
+
+    return images
+
 def main():
     query = input("Введите запрос: ")
 
@@ -161,12 +197,14 @@ def main():
 
     wikidata = get_wikidata(articles)
     wiktionary = get_wiktionary(query)
+    commons = get_commons(query)
 
     result = {
         "query": query,
         "articles": articles,
         "wikidata": wikidata,
         "wiktionary": wiktionary,
+        "commons": commons,
     }
 
     output_file = Path(__file__).with_name("wikimedia.json")
@@ -179,6 +217,7 @@ def main():
     print(f"Сущностей Wikidata: {len(wikidata)}")
     print(f"Файл: {output_file.name}")
     print(f"Статей Викисловаря: {len(wiktionary)}")
+    print(f"Изображений Commons: {len(commons)}")
 
 
 if __name__ == "__main__":
