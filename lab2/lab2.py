@@ -121,6 +121,38 @@ def get_wikidata(articles):
 
     return entities
 
+def get_wiktionary(query):
+    params = {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "generator": "search",
+        "gsrsearch": query,
+        "gsrlimit": "5",
+        "prop": "extracts|info",
+        "explaintext": "1",
+        "inprop": "url",
+    }
+
+    response = requests.get(
+        "https://ru.wiktionary.org/w/api.php",
+        params=params,
+        headers=HEADERS,
+        timeout=30
+    )
+    response.raise_for_status()
+
+    pages = response.json().get("query", {}).get("pages", [])
+
+    return [
+        {
+            "title": page["title"],
+            "url": page.get("fullurl", ""),
+            "text": page.get("extract", ""),
+        }
+        for page in pages
+    ]
+
 def main():
     query = input("Введите запрос: ")
 
@@ -128,11 +160,13 @@ def main():
     articles = get_articles(search_results)
 
     wikidata = get_wikidata(articles)
+    wiktionary = get_wiktionary(query)
 
     result = {
         "query": query,
         "articles": articles,
         "wikidata": wikidata,
+        "wiktionary": wiktionary,
     }
 
     output_file = Path(__file__).with_name("wikimedia.json")
@@ -144,6 +178,7 @@ def main():
     print(f"Сохранено статей: {len(articles)}")
     print(f"Сущностей Wikidata: {len(wikidata)}")
     print(f"Файл: {output_file.name}")
+    print(f"Статей Викисловаря: {len(wiktionary)}")
 
 
 if __name__ == "__main__":
