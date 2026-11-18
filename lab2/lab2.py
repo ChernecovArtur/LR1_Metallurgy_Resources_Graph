@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 import requests
 
 
@@ -28,14 +31,72 @@ def search_articles(query, limit=35):
     return response.json()["query"]["search"]
 
 
+def get_articles(search_results):
+    titles = [article["title"] for article in search_results]
+
+    params = {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "prop": "extracts|links|images|pageimages|pageprops|info",
+        "explaintext": "1",
+        "pllimit": "max",
+        "imlimit": "max",
+        "pithumbsize": "500",
+        "inprop": "url",
+        "titles": "|".join(titles),
+    }
+
+    response = requests.get(
+        API_URL,
+        params=params,
+        headers=HEADERS,
+        timeout=60
+    )
+    response.raise_for_status()
+
+    articles = []
+
+    for page in response.json()["query"]["pages"]:
+        article = {
+            "title": page["title"],
+            "url": page.get("fullurl", ""),
+            "text": page.get("extract", ""),
+            "links": [
+                link["title"]
+                for link in page.get("links", [])
+            ],
+            "images": [
+                image["title"]
+                for image in page.get("images", [])
+            ],
+            "thumbnail": page.get("thumbnail", {}).get("source"),
+            "wikidata_id": page.get("pageprops", {}).get("wikibase_item"),
+        }
+        articles.append(article)
+
+    return articles
+
+
 def main():
     query = input("Введите запрос: ")
-    articles = search_articles(query)
 
-    print(f"Найдено статей: {len(articles)}")
+    search_results = search_articles(query)
+    articles = get_articles(search_results)
 
-    for number, article in enumerate(articles, start=1):
-        print(f"{number}. {article['title']}")
+    result = {
+        "query": query,
+        "articles": articles,
+    }
+
+    output_file = Path(__file__).with_name("wikipedia.json")
+    output_file.write_text(
+        json.dumps(result, ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
+
+    print(f"Сохранено статей: {len(articles)}")
+    print(f"Файл: {output_file.name}")
 
 
 if __name__ == "__main__":
