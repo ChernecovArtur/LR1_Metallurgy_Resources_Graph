@@ -1,0 +1,64 @@
+digraph Wikimedia {
+	overlap=false rankdir=LR splines=true
+	node [fillcolor="#E8F4FA" shape=box style="rounded,filled"]
+	A01 [label="Штейн (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%A8%D1%82%D0%B5%D0%B9%D0%BD_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A02 [label="Лигатура (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D0%B3%D0%B0%D1%82%D1%83%D1%80%D0%B0_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A03 [label="Металлургия" URL="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F"]
+	A04 [label="Чёрная металлургия" URL="https://ru.wikipedia.org/wiki/%D0%A7%D1%91%D1%80%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F"]
+	A05 [label="Цветная металлургия" URL="https://ru.wikipedia.org/wiki/%D0%A6%D0%B2%D0%B5%D1%82%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F"]
+	A06 [label="Легирование (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%9B%D0%B5%D0%B3%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A07 [label="Примесь (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%81%D1%8C_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A08 [label="Металлургия России" URL="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8"]
+	A09 [label="Металлургия Украины" URL="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_%D0%A3%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D1%8B"]
+	A10 [label="Агломерация (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%90%D0%B3%D0%BB%D0%BE%D0%BC%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A11 [label="Отпуск (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%BF%D1%83%D1%81%D0%BA_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A12 [label="Файнштейн (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B9%D0%BD%D1%88%D1%82%D0%B5%D0%B9%D0%BD_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A13 [label="Феррит (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%A4%D0%B5%D1%80%D1%80%D0%B8%D1%82_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A14 [label="Малая металлургия" URL="https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%BB%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F"]
+	A15 [label="Порошковая металлургия" URL="https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%80%D0%BE%D1%88%D0%BA%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F"]
+	A16 [label="День металлурга" URL="https://ru.wikipedia.org/wiki/%D0%94%D0%B5%D0%BD%D1%8C_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B0"]
+	A17 [label="Плазменная металлургия" URL="https://ru.wikipedia.org/wiki/%D0%9F%D0%BB%D0%B0%D0%B7%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F"]
+	A18 [label="Рондель (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%A0%D0%BE%D0%BD%D0%B4%D0%B5%D0%BB%D1%8C_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A19 [label="Чёрная металлургия Украины" URL="https://ru.wikipedia.org/wiki/%D0%A7%D1%91%D1%80%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_%D0%A3%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D1%8B"]
+	A20 [label="Цветная металлургия Украины" URL="https://ru.wikipedia.org/wiki/%D0%A6%D0%B2%D0%B5%D1%82%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_%D0%A3%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D1%8B"]
+	A21 [label="Агломерат (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%90%D0%B3%D0%BB%D0%BE%D0%BC%D0%B5%D1%80%D0%B0%D1%82_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A22 [label="Конвертирование (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A23 [label="Миксер (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%9C%D0%B8%D0%BA%D1%81%D0%B5%D1%80_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A24 [label="Брикет (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B8%D0%BA%D0%B5%D1%82_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A25 [label="Сорбит (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%A1%D0%BE%D1%80%D0%B1%D0%B8%D1%82_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A26 [label="Чёрная металлургия России" URL="https://ru.wikipedia.org/wiki/%D0%A7%D1%91%D1%80%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8"]
+	A27 [label="Передел (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%B4%D0%B5%D0%BB_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A28 [label="Палета (металлургия)" URL="https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D0%BB%D0%B5%D1%82%D0%B0_(%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F)"]
+	A29 [label="Основность (в металлургии)" URL="https://ru.wikipedia.org/wiki/%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C_(%D0%B2_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D0%B8)"]
+	A30 [label="Кулифеев, Владимир Константинович" URL="https://ru.wikipedia.org/wiki/%D0%9A%D1%83%D0%BB%D0%B8%D1%84%D0%B5%D0%B5%D0%B2,_%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80_%D0%9A%D0%BE%D0%BD%D1%81%D1%82%D0%B0%D0%BD%D1%82%D0%B8%D0%BD%D0%BE%D0%B2%D0%B8%D1%87"]
+	A31 [label="Металлургия Азербайджана" URL="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_%D0%90%D0%B7%D0%B5%D1%80%D0%B1%D0%B0%D0%B9%D0%B4%D0%B6%D0%B0%D0%BD%D0%B0"]
+	A32 [label="Вакуумная металлургия" URL="https://ru.wikipedia.org/wiki/%D0%92%D0%B0%D0%BA%D1%83%D1%83%D0%BC%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F"]
+	A33 [label="Зелёная металлургия на Украине" URL="https://ru.wikipedia.org/wiki/%D0%97%D0%B5%D0%BB%D1%91%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_%D0%BD%D0%B0_%D0%A3%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B5"]
+	A34 [label="Металлургия (издательство)" URL="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_(%D0%B8%D0%B7%D0%B4%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE)"]
+	A35 [label="Цветная металлургия России" URL="https://ru.wikipedia.org/wiki/%D0%A6%D0%B2%D0%B5%D1%82%D0%BD%D0%B0%D1%8F_%D0%BC%D0%B5%D1%82%D0%B0%D0%BB%D0%BB%D1%83%D1%80%D0%B3%D0%B8%D1%8F_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8"]
+	A01 -> A12
+	A01 -> A05
+	A02 -> A06
+	A02 -> A03
+	A02 -> A04
+	A03 -> A21
+	A03 -> A10
+	A03 -> A24
+	A03 -> A32
+	A03 -> A06
+	A03 -> A34
+	A03 -> A08
+	A03 -> A09
+	A03 -> A23
+	A03 -> A29
+	A03 -> A27
+	A03 -> A17
+	A03 -> A15
+	A03 -> A05
+	A03 -> A04
+	A03 -> A01
+	A04 -> A21
+	A04 -> A10
+	A04 -> A24
+	A04 -> A32
+}
